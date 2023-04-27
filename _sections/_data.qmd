@@ -1,0 +1,74 @@
+# Data {#sec-data}
+
+## The sample 
+
+We consider four stock markets in the Nordic countries, namely the Norwegian, Swedish, Danish and Finnish stock markets. The period under question is the beginning of 1999 to the end of 2022. For each market, we download all listed shares, both currently listed and delisted. The relevant lists from Thomson Reuters Datastream are LOSLOASH, LSWEALI, LCOSEASH and LHEXINDX, which contain all the currently listed shares in the respective countries, and  DEADNW, DEADSD, DEADDK and DEADFN, which contain all the delisted shares in the respective markets. The relevant share variables are the total return index (RI), the price (P) and the market value (MV). As a proxy for the risk-free rate, we use the EURIBOR 1 month rate. More specifically, we downloaded the total return index (RI) of the variable EIBOR from Thomson Reuters datastream, and calculated the returns as in \eqref{return_equation}. All the relevant share variables are converted to euro using exchange rates downloaded from the ECB^[https://sdw.ecb.europa.eu/browse.do?node=9691296, downloaded February 1 2023.]. 
+
+Compared to, say, American stock data, there are considerably fewer stocks in the chosen indices. To make meaningful statistical estimations and inferences, we therefore consider the four markets as one entity - the Nordic stock market. We exclude all observations that are missing either closing price, closing return or number of shares issued. Further, we require at least 100 valid return observations per year. 
+
+Several stocks have different stock classes, namely A, B and C stocks. For the purposes of investigating the effect of crash risk on stock returns, one could argue that this difference could matter for example in the event of a bankruptcy. However, the different stock classes are still stocks written on the same company, and hence they should represent the same fundamental company characteristics. Keeping several classes of stocks for the same company could influence results when investigating the average association between crash risk and stock returns. Anecdotally, the sample contains noticeable return differences between certain A and B stocks written on the same company. To investigate further, we sorted the sample on company names and investigated what was identified as different classes of stock written on the same company. No stocks were removed from the sample on this basis. 
+
+Some care must be taken when using Datastream's total return index to calculate daily returns for each stock. Likely due to rounding errors, some total return index observations was listed as 0. This is obviously wrong. However, this
+has consequences when we calculate returns as 
+
+\begin{equation}
+r_{t} = \frac{TI_{t}}{TI_{t-1}} - 1, \label{return_equation}
+\end{equation}
+
+where $TI_{i}$ is the value of the total return index at time $t$, i.e. we get a division by zero, which corresponds to infinite returns. Any such observations were removed from the sample. It should be noted that such observations were few. However, this problem also highlights that for low values of the total return index, there might be some imprecise return estimates, or one might have unstable returns for some stocks over a certain time period. If we investigate the returns, we see that on a daily level we have stock returns ranging from almost -1 to 262. Some of these are likely not correct, and can be attributed to rounding error, as just described. If we aggregate returns to monthly levels, we get returns ranging from -1 to 10377166, which seems very unrealistic. Therefore, the problem must be addressed. There exists no objective criterion for determining what is a true extreme return outcome and what can be attributed to data errors. We elected to remove (slightly more than) the smallest 1 percent of the stocks in the sample. More specifically, we did the following. For every date, we identified the 1 percent smallest stocks in the sample as measured by their market value. If a stock at one point in time was one of the smallest stocks, we removed it from the sample entirely. The reason for not only removing the stock from the part of the sample where it was one of the smallest is the following. Firstly, doing this one could be left with return observations that are widely spaced on time, so that we no longer can consider them daily, or maybe even monthly returns, but returns over other unspecified time periods. Such gaps in the data are not desirable when conducting the data analysis. Secondly, several small stocks seem to have very unstable return distributions, to the point where the distributions seem likely to arise from measurement errors. 
+
+
+<!-- We apply a simple filtering of the stock returns by removing positive daily returns more than 200% and negative daily returns less than -90%. This removes 36 negative returns and 146 positive returns. When we now aggregate the results to monthly returns we get a return range from   -->
+
+<!-- This potential problem has not been adressed further.  -->
+
+
+## Comments on the data
+
+The analysis takes the viewpoint of an investor that can invest in all the Nordic markets under study. For that reason, and in order to be consistent when performing the analysis, we have chosen to convert all relevant variables, so that returns are euro denominated, and relative market weights are calculated using EUROs. This choice has implications for the estimations of the lower tail dependence coefficients (LTD), the details of which are described in @sec-methodology. Stocks in the Scandinavian countries are traded in the local currencies. Returns are now affected both by investor behavior and by exchange rate movements. To make this clear, consider a stock where there is no trading during the course of two days, but for which we have a total return index observation. The price of this stock will remain constant in the local currency, say the Norwegian krone (NOK), as will the total return index. However, if there is a change in the NOK-EURO exchange rate, there will be a nonzero change in the euro denominated total return index. 
+
+The time period coincides with the introduction of the euro. This is intentional and is done in order to be consistent with what we consider to be the most relevant risk-free rate, namely the EURIBOR 1 month rate. Thomson Reuters datastream provides an artifical euro exchange rate before 1999, so in theory it would be possible to extend the window of analysis further in the past. We do not want to introduce potential errors by such an artifical exchange rate. One could alternatively convert all relevant variables to another currency that has existed for the whole period, and download a corresponding relevant risk-free rate. 
+
+A note is in order for how we justify using daily returns for estimating LTD when the rest of the analysis is carried out on a monthly time scale. When [@chabi2017crash] calculates LTD and UTD, they use rolling windows of 12 months of daily data with a frequency of 1 month. They then look at the association between monthly average returns and LTD, where the LTD is derived from the copula estimated on daily data. It has been documented in the literature, for example in [@botta2015quantifying], that the distribution of stock returns changes depending on the time scale. This makes sense intuitively if we consider log returns and the central limit theorem, as we may consider monthly log returns as the sum of daily log returns. One might expect some central limit theorem effect to take place when we go from daily returns to monthly returns, at least if the underlying return distributions of daily stock returns are sufficiently well behaved. There is of course an obvious trade off here. If we were to estimate LTD based on monthly data, we would need a substantial time window of observations to be able to hope for precise estimates of LTD. This would require us to assume that the dependency between the returns of individual stocks and returns of the market remains unchanged over large time periods. Such an assumption is hard to justify. There are, however, several ways of motivating the approach taken in [@chabi2017crash]. Firstly, if one is interested in the association between average returns and LTD on the same time scale, one could argue that there is little reason to assume that LTD is very different on monthly time scales than on daily time scales. A non rigorous theoretical justification for this is the well known result that the distribution that arises from aggregation of returns, due to the central limit theorem, converges very fast in the central part of the distribution, but much slower in the tails. Another justification is also due to the aggregation of daily returns to monthly returns. Large absolute monthly returns may be the chance of many consecutive days of smaller returns with
+the same sign, or the may be driven by some large daily returns. An extreme example illustrates this point. If you have one day of -50% return followed (or preceded) by 24 consecutive days of 1% returns, you end up with 63.5% of your initial wealth, while if you have 25 days of consecutive -1% returns you end up with 77.8% of your initial wealth. This means that if there is a risk premium associated with
+stocks having high LTD with the market, the risk premium should be at least partially reflected in the LTD with the market calculated on daily returns. 
+
+
+\begin{figure}[h]
+\centering
+
+
+\input{_figures/fig_10.tex}
+
+
+
+\caption{This plot shows the number of firm observations per month in the Nordic market. 
+Each stock in the sample is required to have at least 100 return observations per year.}
+\label{n_nordic}
+\end{figure}
+
+## Summary statistics
+
+\input{_tables/table_01_centered.tex}
+
+Figure \ref{n_nordic} shows the number of stocks in any given month in the sample. We now turn to summary statistics for LTD across the whole panel of data, i.e. across all stocks and all dates in our dataset.  
+
+We can see in table \ref{tab:ltd_summary_centered} that there is considerable variation in LTD across the sample, from 0 all the way to 0.81. One quarter of all observations have an estimated LTD coefficient of about 0. The median LTD coefficient is 0.115, and three quarters of all observations have an estimated LTD less than 0.235. The average LTD is higher than the median LTD, though the difference is not big. 
+
+\input{_tables/table_03.tex}
+
+<!-- **Spør Petter om beregning av Monthly index return.** -->
+
+Table \ref{tab:sum_ret_variables} displays summary statistics for return based variables (except LTD and UTD). We may note that the average downside beta is higher than the average upside beta, but also with a noticeably higher interquartile range. This can be interpreted in line with the evidence in the literature that correlations tend to increase in market downturns more so than in upturns, though we have not formally tested for a statistical difference between the two quantities. Average and median monthly stock returns are positive and close to zero, and as should be expected the interquartile range is larger for individual stock returns than for the monthly index returns (recall that the monthly index returns are individual for each stock, and is calculated as the value-weighted market return from all other stocks in the sample). The average cokurtosis is positive, but indistinguishable from zero with two decimals of precision. A positive average cokurtosis would indicate that extreme returns tend to occur somewhat simultaneously. The average coskewness is negative, which suggests that stocks tend to have high negative returns simultaneously as the market exhibits high negative returns 
+
+<!-- **(Note, might have to recalculate this as was done in \ref{tab:sum_ret_variables})**.  -->
+
+\input{_tables/cor_table.tex}
+
+Table \ref{tab:cor_matrix} displays the correlation matrix of all the return based variables in this study. The variable that exhibits the highest correlation with LTD is downside beta, while the variable that exhibits the highest correlation with UTD is upside beta. We may also notice that the correlation between LTD and UTD is low. An interpretation is that stocks exhibiting a tendency of crashing when the market crashes do not necessarily exhibit the same tendency of booming when the market booms. This can be seen as a partial justification for the choice of flexible combinations of copulas for modeling the dependence structure between individual stocks and the market. Further, LTD exhibits low correlation with both cokurtosis and coskewness. If one were only to interpret the signs of the correlation coefficients between LTD and the two variables cokurtosis and coskewness, then the correlations are in line with what was observed in the previous paragraph. To be more specific, an increase in cokurtosis indicates that extreme returns to an increasing degree occurs simultaneously. Hence, if LTD and cokurtosis both captures such a characteristic of stock returns, one would expect the correlation between the two to be positive. The interpretation is similar for coskewness, where one would expect a negative correlation coefficient. However, one should not interpret only the signs of the correlation coefficients, as the size of the coefficients are very small. Squaring the values, one could interpret the different correlations as the R-squared in a univariate regression of LTD on the respective variables. It then becomes clear that in a pooled univariate linear regression framework, cokurtosis and coskewness explains next to none of the variation in LTD. 
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+\begin{table}[H]
+\caption{\\ \large{\textbf{Future returns sorted on cokurtosis and LTD}}}
+\captionsetup{font = footnotesize, justification = justified, width = \linewidth}
+\caption*{Stocks have been sorted into quintiles based on their
+                        estimated cokurtosis and LTD. For each quintile, an equal weighted return
+                        for month t+1 has been calculated. This gives 1 time series per quintile of equal
+                        weighted portfolio returns in month t+1. The column 
+                        'Returns' report the time average of these series. *, **
+                        and *** indicate statistical significance at,
+                        respectively, the 10\%, 5\% and 1\% significance level.
+                        
+                        Note that in the presence of tied cokurtosis and/or LTD values, the first 
+                        observation with that cokurtosis/LTD value is ranked lower than the 
+                        following observation with the same cokurtosis/LTD value. This pattern
+                        repeats in the presence of more than two ties. T-statistics for
+                        all the hypothesis testing have been calculated using Newey
+                        and West (1987) standard errors.}
+\centering
+\label{tab:cokurtosis_ltd_sorted_future_returns_equal_weighted}
+\begin{tabular}[t]{llllll}
+\toprule
+Quintile & 1 Low Cokurtosis & 2 & 3 & 4 & 5 High Cokurtosis\\
+\midrule
+1 Weak LTD & 0.506\% & 1.027\%*** & 1.031\%** & 0.796\%* & 0.523\%\\
+2 & 0.549\%* & 1.104\%*** & 1.104\%*** & 0.767\%* & 1.035\%**\\
+3 & 0.64\%** & 1.039\%*** & 1.106\%*** & 0.754\%* & 1.004\%**\\
+4 & 0.364\% & 1.23\%*** & 1.011\%*** & 0.564\% & 0.944\%**\\
+5 Strong LTD & 1.004\%*** & 1.346\%*** & 1.226\%*** & 0.853\%* & 0.705\%\\
+\addlinespace
+Strong - Weak & 0.498\%** & 0.319\% & 0.195\% & 0.057\% & 0.182\%\\
+\bottomrule
+\end{tabular}
+\end{table}

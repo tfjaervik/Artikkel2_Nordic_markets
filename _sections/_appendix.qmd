@@ -1,0 +1,126 @@
+# Appendix
+
+## Data definitions
+
+<!-- In table \ref{tab:data_definitions} we list the different data definitions used in  -->
+<!-- this study.  -->
+
+\input{_tables/data_definitions.tex}
+
+<!-- In table \ref{tab:msci_indices} we list the different indices from MSCI[^1] that have -->
+<!-- been used to calculate the HML and SMB factors from [@fama1993common] country by country. -->
+<!-- Note that the names are the same for all of the countries in this study.  -->
+
+<!-- [^1]:https://www.msci.com/end-of-day-data-search -->
+
+<!-- \input{_tables/MSCI_indices.tex} -->
+
+<!-- The factors are created by calculating -->
+
+<!-- \begin{equation} -->
+<!-- HML = \frac{1}{2} \cdot (sc\_value + lc\_value - sc\_growth - lc\_growth) -->
+<!-- \end{equation} -->
+
+<!-- and  -->
+
+<!-- \begin{equation} -->
+<!-- SMB = \frac{1}{3} \cdot (sc\_value + sc\_none + sc\_growth - lc\_value - lc\_none - lc\_growth), -->
+<!-- \end{equation} -->
+
+<!-- where "lc" stands for "large cap" and "sc" stands for "small cap". Also, "sc_none" means -->
+<!-- "small cap" and "lc_none" means large cap.  -->
+
+<!-- **NOTE: A mistake seems to have been made for Norway, where MID GROWTH has been downloaded in -->
+<!-- place of LARGE GROWTH. Fix this later.** -->
+
+
+
+## Constructing the Fama-French factors 
+
+
+Thomson Reuters Datastream (TDS) is the data source for the raw data used to construct the Fama-French factors. [@landis2021guidelines] find that, on US data, TDS factors are statistically and economically indistinguishable to standard Fama-French CRSP factors. They also point out that there are differences when comparing international factors created using TDS data to publicly available international factors, but it is not clear whether such differences arise from poor data quality in the TDS database, poor data quality in other databases or methodological issues. All time series data stretch from the beginning of January 1997 through December 2021. We used the same constituent lists as listed at the beginning of this section.
+
+The relevant time series variables from TDS are Common Shares Outstanding (WC05301), Total Assets (WC02999), Total Liabilities (WC03351), 
+<!-- Operating Income (WC01250),  -->
+Price (P) and Total Return Index (RI), where the TDS variable codes are given in parentheses. 
+<!-- Operating income is defined by TDS as Net Sales minus Operating Expenses, where the latter is defined to be the total expenses related to a company's operations.  -->
+The relevant static variables from TDS are Time (TIME), Currency (ECUR), Type of Instrument (TYPE), Geographic Group (GEOG) and Inactive Date (WC07015). Time contains the date of a stock's last data update. All stocks with a Time value further back than the January of 1997 were excluded from the sample. Further, we kept only stocks with a Type of Instrument variable equal to EQ, i.e. we only kept equities. To remove foreign listings, we only kept stocks with a geographical code or currency corresponding to the country of the index from which the relevant constituent lists were formed. 
+
+Having filtered the static data, we kept only time series data for the companies that remained in the static sample. For each stock, we removed all time series data more recent than the Inactive Date. This is important for the following reason. TDS provides full time series for all stocks in the sample, but some stocks have been delisted prior to the current date. For delisted stocks, the last known data point is recycled for all dates following the delisting. Hence, not removing such observations may impact later results significantly. We also removed all stocks missing available data for one or more of the time series variables of interest. Applying all these filters, we were left with 1849 companies in the sample.
+
+Lastly we checked the data for extreme return observations, having first converted all variables except Common Shares Outstanding to Euros using the same exchange rates as described previously in this section. There were not many, but we identified 32 return observations exceeding 300%. It is not clear whether such observations stem from erroneous data or whether they are just high returns. There were also 34 return observations below -80%. Instead of removing any such large returns, we opted to winsorize the data at the 0.001 and 0.999 percent level. The reason for this is twofold. Firstly, as these returns are very few compared to the total number of return observations (189,454), the impact of doing this should not be that big. However, if the returns are not erroneous, we do not wish to exclude them from the sample. Secondly, even if such observations are few, observations that are large in magnitude can have an effect on estimates conducted using the ordinary least squares method. As the Fama-French factors are not meant to capture extreme returns, we therefore choose to winsorize as explained above. 
+
+To calculate the Fama-French factors HML and SMB we proceed in the following manner. In June of every year we define breakpoints for size and book-to-market values based on data available in the previous year. The size breakpoint is given by the yearly sample market capitalization median while the book-to-market breakpoints are given by the 30th and 70th book-to-market percentiles. In [@fama1993common] the size breakpoints are given by the 10th and 90th percentiles of market capitalization. However, in [@fama2015five], they use the sample median of market capitalization, though they perform a more detailed portfolio sort then what will be described below. We choose to use the median to retain a large number of companies in each portfolio sort. As the authors themselves note in the [@fama1993common], the choice of breakpoints is arbitrary. The aim of the portfolio sorts is to create factors that are more or less independent of each other. 
+
+Intersecting the different portfolio sorts, we obtain six portfolios: S/H, S/N, S/L, B/H, B/N and B/L, where the S and B are the size sorts small and big and H, N and L are the book-to-market sorts high, neutral and low, respectively. The portfolios are then value-weighted according to market capitalization and monthly returns are calculated starting from July and through June next year. The factor returns are then calculated as 
+
+\begin{equation}
+HML = \frac{1}{2}(S/H + B/H) - \frac{1}{2}(S/L + B/L),\label{HML}
+\end{equation}
+
+and
+
+\begin{equation}
+SMB = \frac{1}{3}(S/L + S/M + S/H) - \frac{1}{3}(B/L + B/M + B/H).\label{SMB}
+\end{equation}
+
+The sample Pearson correlation between the two factors is 0.18, which is quite low. Further, this correlation is 
+reduced to close to 0 if we remove one common observation that has a significant impact on the sample correlation. Visually inspecting a scatterplot of the two factors, which for brevity is not included here, the observations form a cloud with no easily discernible pattern. We interpret this as evidence that the factors do not exhibit any significant degree of dependence. 
+
+To gauge the extent to which our data sample is representative for the Nordic countries, we performed a simple comparison with the MSCI Nordic index.^[https://www.msci.com/documents/10199/6bd9ad54-61be-4bdf-afcd-7465994bcb95]
+We calculated value-weighted index returns from our sample and calculated its Pearson correlation with the MSCI Nordic index returns, the result of which was a correlation coefficient of 0.978. In @sec-methodology we noted some weaknesses of using Pearson correlation as a measure of statistical dependence between random variables, but such a high correlation is still evidence that our data sample is representative for the Nordic countries. The different index returns are not exactly equal, though close, but visually inspecting a scatterplot between the two index returns it is clear that the indices behave very similarly. One should not expect the returns to be exactly similar in magnitude as at the time of writing the MSCI Nordic index consisted of only 85 constituents, which MSCI states covers approximately 85% of the free float-adjusted market capitalization in each country. We therefore have confidence that this data sample is suited to quite accurately describe the Nordic markets. 
+
+
+
+
+## Robustness tables
+
+\input{_tables/double_sorts_cokurtosis_ltd_nll.tex}
+\input{_tables/double_sorts_coskewness_ltd_nll.tex}
+\input{_tables/double_sorts_downside_beta_ltd_nll.tex}
+\input{_tables/univariate_sorts_equal_weighted.tex}
+\input{_tables/double_sorts_beta_ltd_equal_weighted.tex}
+\input{_tables/double_sorts_cokurtosis_ltd_equal_weighted.tex}
+\input{_tables/double_sorts_coskewness_ltd_equal_weighted.tex}
+\input{_tables/double_sorts_downside_beta_ltd_equal_weighted.tex}
+\input{_tables/reg_clustered_on_time_1_size_bm_nll.tex}
+\input{_tables/reg_clustered_on_time_2_size_bm_nll.tex}
+
+
+<!-- ## Density plots -->
+
+<!-- **To be plotted differently. Have currently been plotted using the 'copula' package -->
+<!-- in R, which produces bad plots. Will plot densities by using the formula directly.** -->
+
+<!-- \begin{figure} -->
+<!-- \centering -->
+
+<!-- \input{_figures/fig_7.tex} -->
+
+<!-- \caption{Density plots of copulas exhibiting LTD or UTD. Notice that the rotated -->
+<!-- densities exhibit the opposite characteristic, i.e. UTD or LTD. Top row from the left:  -->
+<!-- Clayton density and Gumbel density. Bottom row from the left: Joe density and Galambos  -->
+<!-- density.} -->
+<!-- \label{LTD_densities} -->
+<!-- \end{figure} -->
+
+
+<!-- \begin{figure} -->
+<!-- \centering -->
+
+<!-- \input{_figures/fig_8.tex} -->
+
+
+<!-- \caption{Density plits of copulas exhibiting NTD. Top frow from the left: Gauss density and Frank density. Bottom row from the left: FGM density and Plackett density.} -->
+<!-- \label{NTD_densities} -->
+<!-- \end{figure} -->
+
+
+<!-- \begin{figure} -->
+<!-- \centering -->
+
+<!-- \input{_figures/fig_9.tex} -->
+
+<!-- \caption{Mixed copula density. A third of weight put on the Clayton copula, the Frank copula and the Gumbel copula} -->
+<!-- \label{mixed_density} -->
+<!-- \end{figure} -->

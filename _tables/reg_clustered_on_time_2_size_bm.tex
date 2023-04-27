@@ -1,0 +1,46 @@
+\begin{table}[H]
+\caption{\\ \large{\textbf{Future returns regressed on different factors}}}
+\captionsetup{justification = justified, width = \linewidth}
+\caption*{Regression of one-month-ahead returns on different
+                               sets of control variables. The dependent variable is
+                               the one-month-ahead return. (1) is a multivariate 
+                               regression on LTD, beta, downside beta, upside beta and coskewness. For each regression, we
+                               add one control variable. In (2) we add cokurtosis. 
+                               Standard errors are clustered on months. In (3) we add size which is the 
+                               logarithm of market capitalization, and in (4) we add the book to market ratio.}
+   \centering
+\label{reg_clustered_on_time_2_size_bm}
+   \begin{tabular}{lcccc}
+      \tabularnewline \midrule \midrule
+      Dependent Variable: & \multicolumn{4}{c}{$r_{t+1}$}\\
+      Model:         & (1)           & (2)           & (3)             & (4)\\  
+      \midrule
+      \emph{Variables}\\
+      (Intercept)    & 0.0041$^{*}$  & 0.0041$^{*}$  & 0.0289$^{***}$  & 0.0240$^{***}$\\   
+                     & (0.0021)      & (0.0021)      & (0.0070)        & (0.0066)\\   
+      LTD            & 0.0262$^{**}$ & 0.0252$^{**}$ & 0.0385$^{***}$  & 0.0384$^{***}$\\   
+                     & (0.0121)      & (0.0119)      & (0.0124)        & (0.0124)\\   
+      $\beta$        & -0.0026       & -0.0031       & 0.0021          & 0.0016\\   
+                     & (0.0090)      & (0.0090)      & (0.0096)        & (0.0095)\\   
+      $\beta^{-}$    & 0.0018        & 0.0019        & -0.0025         & -0.0026\\   
+                     & (0.0036)      & (0.0036)      & (0.0040)        & (0.0040)\\   
+      $\beta^{+}$    & 0.0009        & 0.0014        & -0.0026         & -0.0025\\   
+                     & (0.0065)      & (0.0065)      & (0.0071)        & (0.0071)\\   
+      Coskewness     & -0.0032       & -0.0048$^{*}$ & -0.0075$^{**}$  & -0.0075$^{**}$\\   
+                     & (0.0020)      & (0.0027)      & (0.0035)        & (0.0035)\\   
+      Cokurtosis     &               & 0.0009$^{*}$  & 0.0012$^{**}$   & 0.0012$^{**}$\\   
+                     &               & (0.0005)      & (0.0006)        & (0.0006)\\   
+      size           &               &               & -0.0015$^{***}$ & -0.0014$^{***}$\\   
+                     &               &               & (0.0005)        & (0.0005)\\   
+      bookmarket     &               &               &                 & 0.0025$^{***}$\\   
+                     &               &               &                 & (0.0007)\\   
+      \midrule
+      \emph{Fit statistics}\\
+      Observations   & 185,660       & 185,660       & 70,245          & 70,245\\  
+      R$^2$          & 0.00183       & 0.00197       & 0.00415         & 0.00496\\  
+      Adjusted R$^2$ & 0.00180       & 0.00194       & 0.00405         & 0.00484\\  
+      \midrule \midrule
+      \multicolumn{5}{l}{\emph{Clustered (date) standard-errors in parentheses}}\\
+      \multicolumn{5}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+   \end{tabular}
+\end{table}

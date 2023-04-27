@@ -1,0 +1,33 @@
+\begin{table}[H]
+\caption{\\ \large{\textbf{Future returns sorted on beta and LTD}}}
+\captionsetup{font = footnotesize, justification = justified, width = \linewidth}
+\caption*{Stocks have been sorted into quintiles based on their
+                        estimated beta and LTD. For each quintile, an equal weighted return
+                        for month t+1 has been calculated. This gives 1 time series per quintile of equal
+                        weighted portfolio returns in month t+1. The column 
+                        'Returns' report the time average of these series. *, **
+                        and *** indicate statistical significance at,
+                        respectively, the 10\%, 5\% and 1\% significance level.
+                        
+                        Note that in the presence of tied beta and/or LTD values, the first 
+                        observation with that beta/LTD value is ranked lower than the 
+                        following observation with the same beta/LTD value. This pattern
+                        repeats in the presence of more than two ties. T-statistics for
+                        all the hypothesis testing have been calculated using Newey
+                        and West (1987) standard errors.}
+\centering
+\label{tab:beta_ltd_sorted_future_returns_equal_weighted}
+\begin{tabular}[t]{llllll}
+\toprule
+Quintile & 1 Low $\beta$ & 2 & 3 & 4 & 5 High $\beta$\\
+\midrule
+1 Weak LTD & 0.545\%* & 0.907\%*** & 0.954\%** & 1.19\%** & 0.831\%\\
+2 & 0.494\%** & 0.673\%** & 1.059\%*** & 1.293\%*** & 0.972\%*\\
+3 & 0.55\%** & 0.704\%** & 1.108\%*** & 0.855\%* & 0.99\%*\\
+4 & 0.508\%** & 0.83\%** & 1.119\%*** & 1.111\%*** & 0.789\%\\
+5 Strong LTD & 0.754\%*** & 0.893\%*** & 1.269\%*** & 1.064\%*** & 0.785\%\\
+\addlinespace
+Strong - Weak & 0.208\% & -0.014\% & 0.315\% & -0.126\% & -0.045\%\\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,35 @@
+# Robustness Test and Implications
+
+## Robustness
+
+As we previously have expressed concerns that using the Integrated Arlingtod Distance as
+a decision criterion for choosing the optimal copula specification may lead to unstable LTD
+estimates, we now redo the analysis using a different copula selection criterion. A natural
+criterion to use is to choose the copula specification that has the smallest value for its minimized
+negative log-likelihood function. We start by considering univariate sorts. 
+
+\input{_tables/univariate_sorts_nll.tex}
+
+Table \ref{tab:LTD_nll_sorted_future_returns} displays the average one-month-ahead returns of portfolios formed by sorting stocks into value-weighted portfolios based on estimated LTD quintiles, but using the optimized negative log-likelihood function as a decision criterion for choosing the optimal copula specification. The results are similar to previous results. There is not a monotonous increase in returns as we move from portfolios of weak LTD stocks to portfolios of high LTD stocks, but the portfolios in the two highest LTD quintiles exhibit significantly higher returns than the portfolios in the two lowest LTD quintiles. The long-short portfolio of strong-weak LTD stocks exhibit a one-month-ahead return of 0.388%, which is statistically different from zero at the 10% level. This is a stronger result than what was found in table \ref{tab:LTD_sorted_future_returns}. 
+
+\input{_tables/double_sorts_beta_ltd_nll.tex}
+
+Proceeding with double sorts, table \ref{tab:beta_ltd_nll_sorted_future_returns} displays the average one-month-ahead returns of portfolios formed by sorts on beta and LTD quintiles, again using the optimized negative log-likelihood function as a decision criterion for choosing the optimal copula specification. As in table \ref{tab:beta_ltd_sorted_future_returns} we note that the long-short portfolios do not exhibit a clear pattern in the average one-month-ahead returns. There is also no clear discernible pattern across the LTD quintiles within the different beta quintiles. Had LTD been completely independent of beta one would expect to see results similar to what we saw when we sorted only on LTD. The results are similar when we double sort on LTD and cokurtosis, coskewness and downside beta. The results are displayed in the appendix in table \ref{tab:cokurtosis_ltd_nll_sorted_future_returns}, \ref{tab:coskewness_ltd_nll_sorted_future_returns} and \ref{tab:downside_beta_ltd_nll_sorted_future_returns}, respectively. We may note that we have statistically significant positive one-month-ahead returns in the long-short portfolios in quintile two and three of cokurtosis and quintile one of coskewness. 
+
+
+Next we investigate the impact of using equal-weighted portfolios as opposed to value-weighted
+portfolios when we calculate the average one-month-ahead returns for different quintiles sorted
+on LTD. The results are displayed in \ref{tab:LTD_sorted_future_returns_equal_weighted} in the appendix. The results mirror those of table \ref{tab:LTD_sorted_future_returns}. There is a monotonic increase in one-month-ahead returns as we move from portfolios of stock exhibiting weak LTD to portfolios of stock exhibiting strong LTD, with the exception of the highest quintile exhibiting slightly lower returns than the second highest quintile. Within all quintiles the returns are statistically distinguishable from zero, but the most interesting portfolio, namely the long-short portfolio of strong-weak LTD stocks, exhibits returns that are not. We refer to table  \ref{tab:beta_ltd_sorted_future_returns_equal_weighted}, \ref{tab:cokurtosis_ltd_sorted_future_returns_equal_weighted},
+\ref{tab:coskewness_ltd_sorted_future_returns_equal_weighted} and 
+\ref{tab:downside_beta_ltd_sorted_future_returns_equal_weighted} for equal-weighted one-month-ahead portfolio returns of double sorts on LTD and beta, cokurtosis, coskewness and downside beta, respectively. The results are in line with the results for value-weighted portfolios. 
+
+
+Finally, we have run regressions using LTD derived from the copula specifications that minimized the negative log-likelihood functions used in the optimization part of the LTD estimation step. The results are displayed in the appendix in table \ref{reg_clustered_on_time_1_size_bm_nll} and \ref{reg_clustered_on_time_2_size_bm_nll} and are similar to the previous regression results. One should note that the coefficient estimates on LTD are slightly dimished, though still both economically and statistically significant. 
+
+
+
+## Implications
+
+The results in @sec-results are robust to changing the optimal copula specification selection criterion and to using equal-weighted as opposed to value-weighted portfolios in the portfolio sorts analyses. One could interpret the results of this study as evidence that it is possible, in the absense of frictions, to earn an LTD risk premium by investing in stocks exhibiting strong LTD. If we further believe in expected utility theory, this can be interpreted as evidence that investors are indeed averse to being exposed to stocks with higher levels of LTD. This is evidence that investors behave in accordance with the theoretical predictions in [@chabi2017crash]. However, there is notable statistical uncertainty in the estimates above, and the economic significance of the estimates is small when we look at sorted long-short portfolios of strong LTD minus weak LTD stocks. The regression analyses provides evidence that there is a notable economically significant impact of LTD on one-month-ahead returns. 
+
+

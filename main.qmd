@@ -1,0 +1,70 @@
+---
+title: "Crash risk in the Nordic Stock Market - a cross-sectional analysis"
+# abstract-title: "Abstract"
+# abstract: |
+#  **Abstract**
+#  This paper takes the viewpoint of an investor that can invest in the Nordic countries
+#  Norway, Sweden, Denmark and Finland. The four markets are treated as one integrated market. In the analysis
+#  we investigate whether there exists a risk premium for investing in stocks exhibiting high crash risk, 
+#  as measured by their lower tail dependence with the rest of the market portfolio. We indeed find evidence that 
+#  this is the case, and this evidence is in line with previous research done on American and German stock markets,
+#  as well as theoretical predictions in the literature. However, the results are less clear than was the case for    the abovementioned markets. Lower tail dependence is estimated using convex combinations of copulas exhibiting     different tail dependence characteristics. The results are robust to different portfolio formations and copula     selection criteria.
+author: "Thomas Fjærvik - Norwegian School of Economics"
+date: last-modified
+date-format: "[Last Updated:] MMMM, YYYY"
+toc: false
+number-sections: true
+format:
+  pdf:
+    include-in-header:
+      text: |
+        \addtokomafont{disposition}{\rmfamily}
+        \usepackage{lscape}
+csl: journal-of-finance.csl
+bibliography: references.bib
+---
+
+
+
+**Abstract**
+
+This paper takes the viewpoint of an investor that can invest in the Nordic countries
+Norway, Sweden, Denmark and Finland. The four markets are treated as one integrated market. In the analysis
+we investigate whether there exists a risk premium for investing in stocks exhibiting high crash risk,
+as measured by their lower tail dependence with the rest of the market portfolio. We indeed find evidence that
+this is the case, and this evidence is in line with previous research done on American and German stocks markets,
+as well as theoretical predictions in the literature. However, the results are less clear than was the case for    the abovementioned markets. Lower tail dependence is estimated using convex combinations of copulas exhibiting     different tail dependence characteristics. The results are robust to different portfolio formations and copula     selection criteria.
+  
+{{< pagebreak >}}
+
+{{< include _sections\_introduction.qmd >}}
+
+<!-- {{< pagebreak >}} -->
+
+{{< include _sections\_methodology.qmd >}}
+
+
+{{< pagebreak >}}
+
+{{< include _sections\_data.qmd >}}
+
+<!-- {{< pagebreak >}} -->
+
+{{< include _sections\_results.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections\_discussion.qmd >}}
+
+<!-- {{< pagebreak >}} -->
+
+{{< include _sections\_conclusion.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections\_appendix.qmd >}}
+
+{{< pagebreak >}}
+
+
+# References

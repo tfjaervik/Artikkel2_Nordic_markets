@@ -1,0 +1,192 @@
+# Methodology {#sec-methodology}
+
+We are concerned with a stock's tendency to crash given a market crash. To investigate this, a suitable crash risk measure must be chosen. It is common in finance to measure the association between random variables of interest, for example stock returns, as their Pearson correlation. [@embrechts2002correlation] gives an interesting overview of the properties and pitfalls of the Pearson correlation coefficient. If we were to calculate the correlation between the returns of two financial assets, this would give us an estimate of the strength of the linear relationship between the return distributions. As we are concerned with the relationship between extreme returns, one approach could be to calculate the Pearson correlation coefficient of the returns in the tails of the return distributions. This raises several concerns. Firstly, what is an appropriate threshold for defining the tails of the empirical return distribution. Secondly, the further out in the tails of the return distribution we restrict ourselves, the fewer observations we have to estimate the correlation. One should also note that [@boyer1999pitfalls] show that conditional correlation depends highly nonlinearly on the conditioning level of return. 
+
+
+
+ To illustrate why Pearson correlation is incomplete in our investigation, consider figure \ref{fig:same_cor_diff_dep}. It shows simulations of 1000 independent observations made with identical marginal distributions and equal correlations of 0.7, but with a different dependence structure. It is quite evident from the figure that in the rightmost plot there is a greater tendency for large realizations of one variable occurring with large realizations of the other variable, as compared to the leftmost plot. This information is lost when calculating the correlation between the variables.
+ 
+\begin{figure}[ht!]
+    \centering
+    \captionsetup{justification = centering, width = \linewidth}
+    \caption{\\ \large{\textbf{Scatter plots}}}
+    \captionsetup{font = small, justification = justified, width = \linewidth}
+    \caption*{Scatter plot of $n=1000$ independent observations made with identical marginal distributions and equal correlations of 0.7, but different dependence structure}
+    \rule[1ex]{\textwidth}{0.5pt}
+    \input{_figures/_overleaf/same_cor_diff_dep.tex}
+    \label{fig:same_cor_diff_dep}
+    \rule[1ex]{\textwidth}{0.5pt}
+\end{figure}
+
+Figure \ref{fig:same_cor_diff_dep} was generated using the concept of a copula function, which will now be introduced. A nice exposition of copula theory can be found in [@nelsen2007introduction]. Very briefly put, a copula is a function that "couples" together marginal distribution functions and yields a multivariate distribution function. The usefulness of copulas in finance is due to a theorem which is attributed to [@sklar1959fonctions]. Consider equation \eqref{Sklar}
+
+\begin{equation}
+    H(x) = C(F_{1}(x_{1}), ..., F_{d}(x_{d})), \text{   } x \in \mathbb{R}^{d}. \label{Sklar}
+\end{equation}
+
+
+This equation sums up the parts of Sklar's theorem that are most useful for the purposes of this paper. Briefly, the theorem states that every $d$-dimensional multivariate distribution function $H$ has a $d$-dimensional copula representation $C$. It also states that we may apply any copula $C$ to $d$ univariate distributions $F_{1}, ..., F_{d}$ and the result will be a multivariate distribution function $H$. 
+
+To define our measure of crash risk, consider the pair of random variables $(X_{1}, X_{2})$, in our case representing bivariate returns, with corresponding cumulative distribution functions $(F_{X_{1}}, F_{X_{2}})$. Let $X_{1}$ represent the return of a stock and $X_{2}$ the return of the market portfolio. To investigate left tail dependence, we could ask about the probability of a low stock return, given a low market return. Formally, this can be represented as 
+
+\begin{equation}
+    L(q) = \text{Pr} \left[ X_{1} < F_{X_{1}}^{-1}(q) | X_{2} < F_{X_{2}}^{-1}(q) \right],
+\end{equation}
+
+where $q$ is some quantile. We could then ask ourselves about the dependence far out in the left tail, formally defined as 
+
+\begin{equation}
+    \text{LTD} := \lim\limits_{q\rightarrow 0^{+}} L(q),
+\end{equation}
+
+where LTD stands for lower tail dependence. Upper tail dependence (UTD) is defined analogously as
+
+\begin{equation}
+    \text{UTD} := \lim\limits_{q\rightarrow 1^{-}} U(q),
+\end{equation}
+
+where we have
+
+\begin{equation}
+    U(q) = \text{Pr} \left[ X_{1} > F_{X_{1}}^{-1}(q) | X_{2} > F_{X_{2}}^{-1}(q) \right].
+\end{equation}
+
+LTD and UTD can be calculated as properties of the copula associated with the bivariate distribution of $(X_{1}, X_{2})$ by the formulas
+
+\begin{equation}
+    \text{LTD} = \lim\limits_{q\rightarrow 0^{+}} \frac{C(q,q)}{q} \text{ and } \text{UTD} = \lim\limits_{q\rightarrow 1^{-}} \frac{1 - 2q + C(q, q)}{1-q}. \label{LTD&UTD}
+\end{equation}
+
+To estimate LTD and UTD then, we will estimate the copulas that determine the dependence between individual stock returns and market returns. The estimation of these copulas will be outlined in the next section.
+
+## Estimating the crash risk measure
+
+We follow [@chabi2017crash] and calculate a market return for each individual stock to avoid endogeneity problems. Specifically, we calculate the value-weighted market return for stock $i$ by excluding stock $i$ from the market portfolio. This is particularly important when we are looking at stock data from indices which are dominated by a few big stocks. 
+
+<!-- To illustrate this point, consider \ref{fig:eqnr_mkt_share}, which shows how Equinor's market value has exceeded one fifth of the combined market value of all Norwegian stocks in our sample from the beginning of 2013 to the end of 2016. Obviously, including Equinor itself in calculating the market return heavily impacts the resulting market return for Norwegian stocks.  -->
+
+<!-- \begin{figure}[ht!] -->
+<!--     \centering -->
+<!--     \captionsetup{justification = centering, width = \linewidth} -->
+<!--     \caption{\\ \large{\textbf{Endogeneity concern}}} -->
+<!--     \captionsetup{font = small, justification = justified, width = \linewidth} -->
+<!--     \caption*{The market share of Equinor relative to all Norwegian stocks in the sample from 2013 to 2016} -->
+<!--     \rule[1ex]{\textwidth}{0.5pt} -->
+<!--     \input{_figures/_overleaf/eqnr_mkt_share.tex} -->
+<!--     \label{fig:eqnr_mkt_share} -->
+<!--     \rule[1ex]{\textwidth}{0.5pt} -->
+<!-- \end{figure} -->
+
+
+One implication of Sklar's theorem is that we may estimate the marginal distributions of individual stock returns and market returns separately from their dependence structure. Accordingly, we must choose whether to estimate the marginal distributions parametrically or non-parametrically, and similarly for the copulas. Following [@chabi2017crash], marginal distributions are estimated non-parametrically by their scaled distribution functions, while the copulas are estimated parametrically. The choice to estimate the marginal distributions non-parametrically is made to avoid misspecification. For the copulas, however, it will be convenient to perform parametric estimations so that we may calculate LTD and UTD according to \eqref{LTD&UTD}. To mitigate the misspecification concern when estimating the copulas, several copulas are estimated and the most appropriate one is chosen according to a decision criterion that will be outlined later. 
+
+
+Many copulas that are convenient to work with do not allow for modeling LTD and UTD simultaneously. Typically, they exhibit only one of either LTD, UTD or NTD (no tail dependence). It is easy to show that every convex combination of copula functions is again a copula, see for example [@tawn1988bivariate]. This allows us to consider copulas with more complicated tail dependence properties by using convex combinations of copulas exhibiting either LTD, NTD or UTD. Table \ref{tbl: copula_categories} sums up the different copulas used in this study. 
+
+\begin{table}[h] 
+
+\caption{Copulas from each category}
+\centering
+\begin{tabular}[t]{l|l|l}
+\hline
+\hline
+LTD & NTD & UTD\\
+\toprule
+Clayton & Gauss & Gumbel\\
+
+Rotated Gumbel & Frank & Joe\\
+
+Rotated Joe & FGM & Galambos\\
+
+Rotated Galambos & Plackett & Rotated Clayton\\
+\hline
+\hline
+\end{tabular}
+\label{tbl: copula_categories}
+\end{table}
+
+
+All possible combinations consisting of one copula from each category is considered, i.e. 64 in total. Formally, such a combination is represented as
+
+\begin{equation}
+    C(u_{1}, u_{2}; \Theta) = w_{1}\cdot C_{\text{LTD}}(u_{1}, u_{2}; \theta_{1}) + w_{2}\cdot C_{\text{NTD}}(u_{1}, u_{2}; \theta_{2}) + (1 - w_{1} - w_{2})\cdot C_{\text{UTD}}(u_{1}, u_{2}; \theta_{3}),
+\end{equation}
+
+where $\Theta$ denotes the copula parameters to be estimated, which are $\theta_{i}$ for $i = 1,2,3$ for the three copulas in each of the 64 combinations and $w_{i}$ for $i = 1,2$ are non-negative weights that sum to $1 - w_{1} - w_{2} \geq 0$, such that all weights in the convex combination are non-negative and sum to 1. Details of the estimation procedure will be outlined below. Common for estimation of the marginal distributions of stock returns $r_{i}$ and market returns $r_{m}$, as well as estimation of the copula parameters, is a rolling estimation window with a length of 12 months and a rolling interval of 1 month. As previously mentioned, we require at least 100 observations per year, which implies that the number of observations used in each estimate will range between 100 and about 250. 
+
+<!-- **Note to self: We have required 100 or more return observations per year, but we are performing the estimations using 12 month rolling windows. The way we are doing it now, we cannot guarantee that all estimation windows contain at least 100 observations, though most contain well over 100 observations.** -->
+
+The length of the estimation window reflects a trade off between the number of observations needed for precise estimates and a desire to capture time-varying dependence in the bivariate distribution of $r_{i}$ and $r_{m}$. 
+
+Consider a random sample of size $n$ from the bivariate distribution $F(r_{i}, r_{m}) = C(F_{i}(r_{i}), F_{m}(r_{m}))$ of an individual stock return $r_{i}$ and the market return $r_{m}$. $F_{i}$ and $F_{m}$ are the corresponding marginal distributions and $C$ is some copula. To be clear, $n$ denotes the number of daily return observations. $F_{i}$ and $F_{m}$ are estimated as
+
+\begin{equation}
+    \hat{F_{i}}(x) = \frac{1}{n+1}\sum\limits_{k = 1}^{n} \mathbb{1}_{r_{i,k} \leq x} \text{  and  } \hat{F}_{m}(x) = \frac{1}{n+1}\sum\limits_{k = 1}^{n} \mathbb{1}_{r_{m,k} \leq x},
+\end{equation}
+
+where $\mathbb{1}_{p(y)}$ is the indicator function which is equal to $1$ whenever the proposition $p(y)$ is true and $0$ otherwise. $F_{i}$ and $F_{m}$ are rescaled empirical distribution functions. We scale by $n+1$ instead of $n$ because some of the copula densities are not well behaved at the borders of their support. Next, one has to estimate the copula parameters $\Theta_{j}$ for each combination $j = 1,...,64$. This is done by a maximum likelihood procedure from [@genest1995semiparametric]. Formally, the estimate $\hat{\Theta}_{j}$ is given by
+
+\begin{equation}
+    \hat{\Theta}_{j} = \text{argmax}_{\Theta_{j}} L_{j}(\Theta_{j}) \text{  with  } L_{j}(\Theta_{j}) = \sum\limits_{k=1}^{n} \text{log}(c_{j}(\hat{F}_{i, r_{i,k}}, \hat{F}_{m, r_{m,k}}; \Theta_{j})), 
+\end{equation}
+
+where $c_{j}(., .; \Theta_{j})$ is the copula density corresponding to combination $j$ so that $L_{j}(\Theta_{j})$ is the log-likelihood function corresponding to combination $j$.
+
+## Copula selection criterion
+
+To my knowledge, in the literature there does not exist a widely agreed upon criterion for selecting the most appropriate copula. We follow [@chabi2017crash] and calculate a measure of the distance between each copula and the empirical copula function. To define the empirical copula function, let $(R_{i, k})_{k=1}^{n}$ denote the rank statistic of the sample $(r_{i,k})_{k=1}^{n}$ of individual fund return observations from fund $i$, and similarly let $(R_{m, k})_{k=1}^{n}$ denote the rank statistic of a corresponding sample of market returns. Now consider the lattice
+
+\begin{equation*}
+    L = \left[ \left(\frac{t_{i}}{n}, \frac{t_{m}}{n}\right), t_{i} = 0,1,...,n, t_{m} = 0,1,...,n \right].
+\end{equation*}
+
+The empirical copula function is defined on $L$ by the following equation:
+
+\begin{equation}
+    \hat{C}_{(n)} \left(\frac{t_{i}}{n}, \frac{t_{m}}{n}\right) = \frac{1}{n}\sum\limits_{k=1}^{n} \mathbb{1}_{R_{i,k}\leq t_{i}} \cdot \mathbb{1}_{R_{m,k}\leq t_{m}}. \label{emp.copula}
+\end{equation}
+
+The Integrated Arlington Distance is chosen as a measure of distance between the estimated copulas $C_{j}(., .; \Theta_{j})$ and the empirical copula $\hat{C}_{(n)}$. It is calculated as
+
+\begin{equation}
+    D_{j} = \sum\limits_{t_{i} = 1}^{n} \sum\limits_{t_{m} = 1}^{n} \frac{\left( \hat{C}_{(n)} \left(\frac{t_{i}}{n}, \frac{t_{m}}{n}\right) - C_{j} \left(\frac{t_{i}}{n}, \frac{t_{m}}{n}; \hat{\Theta}_{j}\right) \right)^{2} }{ C_{j} \left(\frac{t_{i}}{n}, \frac{t_{m}}{n}; \hat{\Theta}_{j}\right) \cdot \left(1 -  C_{j} \left(\frac{t_{i}}{n}, \frac{t_{m}}{n}; \hat{\Theta}_{j}\right) \right)}.
+\end{equation}
+
+One can thus interpret the Integrated Arlington Distance (IAD) as a measure of the distance between the predicted value of the parametric copulas $C_{j}(., .;\hat{\Theta_{j}})$ and the empirical copula $\hat{C}_{(n)}$ for every point in $L$. By looking at figure \ref{fig:IAD_weights} it is clear that IAD puts substantially more weight on observations in the tails of the distribution. Hence, IAD measures the weighted squared difference from the predicted value of the parametric copulas $C_{j}(., .;\hat{\Theta_{j}})$ to the empirical copula $\hat{C}_{(n)}$ for every point in $L$, with far greater weights put on points in the tails. Whichever copula $C_{j}(., .;\hat{\Theta_{j}})$ for $j = 1,...,64$ that minimizes $D_{j}$ will be considered the best fit to the data, and will therefore be used to calculated LTD and UTD. 
+
+
+
+\begin{figure}[ht!]
+    \centering
+    \captionsetup{justification = centering, width = \linewidth}
+    \caption{\\ \large{\textbf{Illustration of weighting in IAD}}}
+    \captionsetup{font = small, justification = justified, width = \linewidth}
+    \caption*{Plot of the function f(x) = $\frac{1}{x(1-x)}$ for $0 \ < x < 1$.}
+    \rule[1ex]{\textwidth}{0.5pt}
+    \input{_figures/IAD_weights.tex}
+    \label{fig:IAD_weights}
+    \rule[1ex]{\textwidth}{0.5pt}
+\end{figure}
+
+## Alternative copula methodology
+
+A notable contribution to the part of the finance literature concerned with copula applications is [@patton2006modelling]. It introduces the notion of a conditional copula and applies it to the modeling of asymmetric exchange rate dependence. Furthermore, the approach taken to copula selection is quite different. [@patton2006modelling] chooses a copula and models time variation in the copula parameter. This can be called a dynamic copula approach, in contrast to the static copula approach taken in [@chabi2017crash], where the copula can change per time period. [@supper2020comparison] performs a simulation study where they compare different tail dependence estimators. Amongst these estimators are the one used in [@patton2006modelling] and the one used in [@chabi2017crash]. They find that the dynamic copula approach of [@patton2006modelling] has superior performance to [@chabi2017crash] in their simulation study. One could note that their data generating process is similar to the process given by a dynamical copula.
+
+<!-- **Nevertheless, this is a result that should be noted, and the methodology of [@patton2006modelling] will (maybe) be tested later in the paper.**   -->
+
+## Some comments on the methodology
+
+There are at least two ways to estimate a parameter of interest that is tied to a statistical distribution. One can either try to estimate the parameter directly, or one can try to estimate the associated distribution and infer the parameter. This paper follows the latter approach. Modeling the distribution as opposed to the parameters in our case has the advantage of being able to make use of all the available information in the empirical return distribution. Further, and contrasting with the approach taken by [@patton2006modelling], the approach of this paper demands fewer assumptions about the copula family behind the data generating process. Lastly, the aim of the procedure is to capture some dynamics of the dependence structures in the data by updating the best fitting copula every time period. However, it is not clear that the procedure possesses this latter property. Intuitively, we are optimizing over a multidimensional surface that may be rugged. As we rely on optimization algorithms, there is no way of guaranteeing that we are not getting stuck in some local optimum that is not the optimum copula specification. One may also imagine that this can cause estimates for certain time periods to be quite imprecise, in the sense that the estimated LTD varies quite a lot from, say, week to week. 
+
+
+<!-- This is something I intend to investigate, and if deemed necessary, I want to find a way to smooth such jumps in parameter estimates. This potential problem with the methodology might not be as severe in the case of the methodology used in [@patton2006modelling]. This is due to that methodology requiring fewer parameters to estimate, and making use of time series methods to model the time variation in the copula parameter.  -->
+
+
+## Concerns about the methodology
+
+<!-- As mentioned above, a potential concern whenever one is doing numerical maximum likelihood optimization is the possibility of being stuck in a local extremal point that is not a global extremal point. This possibility cannot be ruled out. In figure \ref{LTD_densities}, \ref{NTD_densities} and \ref{mixed_density} that are found in the appendix, we have plotted example densities of the different densities involved in this study. Note that the densities in figure \ref{LTD_densities} show examples of the shape of densities exhibiting LTD *and* UTD. This is because all the densities in this study displaying either LTD or UTD are rotated versions of the corresponding density exhibiting either UTD or LTD.  -->
+
+<!-- In the example plots below there does not seem to be any particularly rugged surfaces or surfaces with complicated shapes. Hence, one might hope that convex combinations of the same densities are similar in nature. -->
+
+No formal test has been done to investigate the extent to which the mixed densities applied in this study may be rugged in nature. A potential way to mitigate this concern is to employ some sort of stochastic optimization algorithm. This has not been done in this study. Another concern that has been mentioned earlier is the sample size used for estimating individual stock LTD. One year of observations equates to roughly 250 observations, with some stocks having as few as 100 valid return observations per year. Optimally, we would like to have many more observations to be more confident that the numerical LTD estimates converge to the true value. The choice of estimation window is a trade-off between sample size and a changing nature of dependency between variables. It is difficult to argue that LTD should not change given changes in market conditions, and market conditions do change over time. Hence, having an estimation window of, say, 10 years, one would have to argue that individual stock LTD remains largely unchanged over a 10 year period. This trade-off is also the reason why we are estimating LTD based on daily returns, and analyzing the average effect of LTD on monthly returns. Estimating LTD on monthly returns results in too few observations. Also, it seems reasonable that LTD should not change much from day to day, so we make the assumption that estimated LTD remains constant for the following month. 
+

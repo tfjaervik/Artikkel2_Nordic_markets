@@ -1,0 +1,36 @@
+\begin{table}[H]
+\caption{\\ \large{\textbf{Future returns sorted on coskewness and LTD}}}
+\captionsetup{font = footnotesize, justification = justified, width = \linewidth}
+\caption*{Stocks have been sorted into quintiles based on their
+                        estimated coskewness and LTD, but using the optimized negative log-likelihood
+                        function as a decision criterion for choosing the optimal
+                        copula specification. For each quintile, a value weighted return
+                        for month t+1 has been calculated using weights from
+                        month t. This gives 1 time series per quintile of value
+                        weighted portfolio returns in month t+1. The column 
+                        'Returns' report the time average of these series. *, **
+                        and *** indicate statistical significance at,
+                        respectively, the 10\%, 5\% and 1\% significance level.
+                        
+                        Note that in the presence of tied coskewness and/or LTD values, the first 
+                        observation with that coskewness/LTD value is ranked lower than the 
+                        following observation with the same coskewness/LTD value. This pattern
+                        repeats in the presence of more than two ties. T-statistics for
+                        all the hypothesis testing have been calculated using Newey
+                        and West (1987) standard errors.}
+\centering
+\label{tab:coskewness_ltd_nll_sorted_future_returns}
+\begin{tabular}[t]{llllll}
+\toprule
+Quintile & 1 Low Coskewness & 2 & 3 & 4 & 5 High coskewness\\
+\midrule
+1 Weak LTD & 0.637\%* & 0.723\%* & 0.642\% & 0.555\% & 0.374\%\\
+2 & 0.63\%* & 0.967\%*** & 0.921\%*** & 0.046\% & 0.477\%\\
+3 & 0.685\%* & 0.729\%*** & 0.971\%*** & 0.445\% & -0.343\%\\
+4 & 1.166\%*** & 0.927\%*** & 0.944\%*** & 0.376\% & 0.487\%\\
+5 Strong LTD & 1.233\%*** & 1.029\%*** & 1.018\%*** & 0.664\% & 0.405\%\\
+\addlinespace
+Strong - Weak & 0.596\%** & 0.307\% & 0.376\% & 0.109\% & 0.031\%\\
+\bottomrule
+\end{tabular}
+\end{table}

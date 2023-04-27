@@ -1,0 +1,78 @@
+# Results {#sec-results}
+
+## Univariate sorts
+
+\input{_tables/univariate_sorts.tex}
+
+We start by considering univariate portfolio sorts where we sort on LTD. We sort
+the data into quintiles based on their estimated LTD coefficient in month $t$ and wish to investigate the corresponding return distribution of the LTD sorted portfolios. Within each quintile, we calculate the value-weighted portfolio return for month $t+1$ using weights calculated at time $t$. This gives five time series of LTD sorted portfolio returns. Averaging over these time series, we get an estimate of expected returns within each quintile. We also calculate the expected one-month-ahead return of a long-short portfolio of stocks that exhibit strong LTD (the upper quintile) and stocks that exhibit weak LTD (the lower quintile). The results are reported in table \ref{tab:LTD_sorted_future_returns}.
+
+The univariate results are much in line with what was found in [@chabi2017crash], though of much smaller economical significance. There is an almost uniform increase in average portfolio returns as we move from the quintile with the lowest LTD estimates to the quintile with the highest LTD estimates. The pattern is broken only at the highest LTD quintile, where the average one-month-ahead returns are lower than in the prior quintile, but still positive and higher than in the first two quintiles. The long-short portfolio sorted on LTD thus exhibits positive average one-month-ahead returns. The long-short portfolio returns are not economically  significant, and only the portfolio returns of quintile 3 and 4 exhibit one-month-ahead returns that are statistically distinguishable from zero at the five percent significance level. To illustrate the economic significance, note that the standard deviation of the one-month-ahead returns of the long-short portfolio is 0.0028. A one standard deviation increase in the returns of the long-short portfolio translates into a $0.0028 \times 0.191\% \times 12= 0.006\%$ increase in the annualized excess return of the long-short portfolio. One can interpret the univariate results as support for the hypothesis that the risk premium to investing in stocks that are exposed to higher levels of crash risk is small. If we interpret it to be positive this is in line with the theoretical results in [@chabi2017crash], but the theoretical predictions are not clearly verified by the univariate sorting on LTD. The results are not inconsistent with the corresponding empirical results in [@supper2020comparison]. That such a risk premium should exist makes intuitive sense if we consider expected utility theory. The marginal utility of an investor is higher in bad times, and hence the investor requires a risk premium for investing in stocks with higher probability of poor returns when the market performs particularly poorly.
+
+
+Next we consider table \ref{tab:UTD_sorted_future_returns}, which displays
+one-month-ahead value weighted portfolio returns of stocks sorted into quintiles based on their estimated UTD value in the prior month. We almost observe the opposite pattern than when we sorted on LTD. One-month-ahead returns are generally decreasing as a function of UTD quintile, with the exception of moving from quintile 3 to quintile 4. The long-short portfolio exhibits a negative one-month-ahead average return. The estimated average one-month-ahead portfolio returns are not all statistically distinguishable from zero at the five percent significance level. We may note, however, that the negative long-short portfolio return is indeed statistically significant at the five percent level. Hence, there seems to be a negative risk premium associated with investing in stocks that do particularly well when the market performs particularly well. A one standard deviation increase in the annualized excess return of the long-short portfolio translates into a $0.0024 \times 0.691\% \times 12= 0.02\%$ decrease in the annualized excess return of the long-short portfolio, which is not a large decrease.
+
+We also check whether it is possible to which degree the positive return spread on LTD sorted portfolios, albeit not statistically significant or big in economic terms, can be explained by the [@fama1993common] factor model. The results are displayed in table 7.
+<!-- \ref{tab:trading_strategy_label}.  -->
+The factor model accounts for little of the variation in the monthly return spread. For each specification there is an associated positive alpha. However, it is not statistically significant. This is perhaps not surprising considering that the mean return spread in table \ref{tab:LTD_sorted_future_returns} was statistically distinguishable from zero.
+
+
+
+Before moving on the double sorts, we issue a word of caution. The above analysis of univariate sorts rests on the assumption that the different 
+quintile portfolios represent well diversified investments that differ
+only in the level of the sorting variable, i.e. the level of LTD/UTD. There are fewer stocks in each quintile in the Nordic market analysed in this
+study compared to the American stock market. Hence, this assumption may be less well founded in this analysis than in the analysis conducted in [@chabi2017crash].
+
+\input{_tables/univariate_sorts_UTD.tex}
+
+\input{_tables/long_short_reg.tex}
+
+## Double sorts
+
+In this section we first create portfolios of stocks based on quintiles of some return based variable other than LTD, and then we repeat the univariate analysis above within each such quintile. The return based variables under consideration are beta, downside beta from [@ang2006downside], coskewness, which was shown to be negatively associated with higher expected returns in [@harvey2000conditional], and cokurtosis, which was shown to be positively associated with higher expected returns both in [@fang1997co] and [@dittmar2002nonlinear]. 
+
+\input{_tables/double_sorts_beta_ltd.tex}
+
+Table \ref{tab:beta_ltd_sorted_future_returns} displays one-month-ahead average future returns for value weighted portfolios that have been double sorted on beta and LTD. We note that the long-short portfolios do not exhibit a clear pattern in the average one-month-ahead returns. There is also no clear discernible pattern across the LTD quintiles within the different beta quintiles. Had LTD been completely independent of beta one would expect to see results similar to what we saw when we sorted only on LTD. 
+
+
+Table \ref{tab:cokurtosis_ltd_sorted_future_returns} displays one-month-ahead average future returns for value weighted portfolios that have been double sorted on cokurtosis and LTD. All long-short portfolios now exhibit positive average one-month-ahead returns, though none are statistically indistinguishable from zero. The increases in average future returns are not monotonic, though there appears to be a generally increasing pattern as we move from portfolios of stocks that exhibit weak LTD to portfolios of stocks that exhibit strong LTD. These results seem to be in line with what has been documented for the American and German stock markets in [@chabi2017crash] and [@supper2020comparison], respectively. 
+
+
+Table \ref{tab:coskewness_ltd_sorted_future_returns} displays one-month-ahead average future returns for value weighted portfolios that have been double sorted on coskewness and LTD. All long-short portfolios, with the exception of the one consisting of high coskewness sorted stocks, exhibit positive average one-month-ahead returns. There are no monotonic increases in average future returns, and it is less clear than was the case for cokurtosis sorted stock portfolios that there is a general increase in average future returns as we move from portfolios of stocks exhibiting weak LTD to portfolios of stocks exhibiting strong LTD. 
+
+Lastly we consider Table \ref{tab:downside_beta_ltd_sorted_future_returns}, which displays one-month-ahead average future returns for value weighted portfolios that have been double sorted on downside beta and LTD. The same remarks that were given for coskewness sorted stock portfolios apply here, but with a different long-short portfolio exhibiting negative one-month-ahead returns. 
+
+\input{_tables/double_sorts_cokurtosis_ltd.tex}
+
+
+\input{_tables/double_sorts_coskewness_ltd.tex}
+
+
+\input{_tables/double_sorts_downside_beta_ltd.tex}
+
+
+## Regression analysis
+
+To investigate the association between one-month-ahead returns and more than two variables, we turn to a different tool of analysis than univariate sorts and double sorts, namely multivariate regressions. 
+<!-- Multivariate associations in empirical finance are typically investigated using a regression framework. It is common to estimate Fama-Macbeth regressions when we are interested in the risk -->
+<!-- premium of being exposed to a certain risk factor. A different approach, which one could call a more modern approach, is to estimate clustered standard errors, clustering on the time variable. Typically, these approaches should yield similar results, though not equal. We shall explore both.  -->
+<!-- **Should perhaps explain the differences of the approaches in the appendix. Hva tenker du Petter?** -->
+We begin estimate regressions using clustered standard errors, clustering on the time variable. The results are displayed in table \ref{reg_clustered_on_time_1_size_bm}. Firstly, we may note that in all the regression specifications, LTD exhibits both an economically and statistically significant positive coefficient when regressed on one-month-ahead returns. Further, the coefficient estimate appears stable across all regression specifications. 
+The other coefficient estimates in the different regression specifications exhibit neither economic nor statistical significance. To illustrate the economic significance, we consider the LTD coefficient estimate in regression specification (2).  A one standard deviation increase in LTD translates into a $0.108 \times 0.0303 \times 1200 = 3.93\%$ increase in the annualized one-month-ahead excess returns. 
+<!-- Hence, there appears to be no cross-sectional explanatory power on stock returns from beta, downside beta and upside beta.  -->
+The adjusted R-squared is low, but it would be quite remarkable if these regressors alone explained a large portion of stock returns in the Nordic countries. Hence, this was to be expected. 
+
+Looking at table \ref{reg_clustered_on_time_2_size_bm} we may investigate the effect of adding coskewness, cokurtosis, size as measured by the logarithm of market capitalization and the book-to-market value, respectively. In specification (1) and (2) the coefficient estimates for LTD are slightly diminished compared to the more sparse regression specifications in table \ref{reg_clustered_on_time_1_size_bm}, but the estimates are still very similar. The coskewness coefficient estimate is statistically indistinguishable from zero before adding cokurtosis to the regression specification. Adding cokurtosis, both coefficient estimates are statistically significant at the 10 percent level. The signs of the coefficient estimates on coskewness and cokurtosis are consistent with our previous discussion, but the absolute size of the estimates are small. Notice that in regression specification (3) and (4) we have significantly fewer observations. This is due to missing accounting data for companies. This means that regression specifications (3) and (4) are not directly comparable to regression specifications (1) and (2). We still note that in this reduced sample, the LTD coefficients have increased notably in size and are now statistically significant at the 1 percent level. Coskewness and cokurtosis are statistically significant at the five percent level, and both of their magnitudes have increased. Their coefficient signs are still consistent with our previous discussion. Further, we confirm previous findings from the literature (for example [@fama1993common]), namely that firm size has a negative impact on returns, while the book-to-market ratio has a positive impact on returns. To illustrate the economic significance of the LTD coefficient estimates, we focus on regression specification (4).  A one standard deviation increase in LTD translates into a $0.108 \times 0.0384 \times 1200 = 4.98\%$ increase in the annualized one-month-ahead excess returns. It is interesting to note that by including downside beta in the regression specifications, we do not diminish the coefficient estimates on LTD notably. This demonstrates that the different measures do not measure equivalent parts of the dependence structure between stock returns and the market. 
+
+
+<!-- and the Fama-French factors High minus Low (HML) and Small minus Big (SMB) as explanatory variables for one-month-ahead returns. Coefficient estimates for LTD are slightly diminished compared to the more sparse regression specifications in table \ref{reg_clustered_on_time_1_size_bm}, but the estimates are still very similar. The coskewness coefficient estimate is statistically indistinguishable from zero before adding cokurtosis to the regression specification. Adding cokurtosis, both coefficient estimates are statistically significant at the 10 percent level. The signs of the coefficient estimates on coskewness and cokurtosis are consistent with our previous discussion, but the absolute size of the estimates are small. We may note that adding HML and SMB to the regression specification has no impact on the LTD coefficient estimate. Further, HML and SMB has negligible explanatory power on one-month-ahead returns and both coefficient estimates are statistically indistinguishable from zero. In summary, the only explanatory variable in our regression specifications that seems to have both statistically and economically significant explanatory power is LTD.  -->
+
+\input{_tables/reg_clustered_on_time_1_size_bm.tex}
+
+
+\input{_tables/reg_clustered_on_time_2_size_bm.tex}
+
+
+

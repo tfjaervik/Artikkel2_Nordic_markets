@@ -1,0 +1,49 @@
+\begin{table}[H]
+\caption{\\ \large{\textbf{Future returns regressed on different factors}}}
+\captionsetup{justification = justified, width = \linewidth}
+\caption*{Regression of one-month-ahead returns on different
+                               sets of control variables. Note that LTD has been derived from the 
+                               copula specifications that minimized the negative log-likelihood functions
+                               in the optimization step of the LTD estimations. The dependent variable is
+                               the one-month-ahead return. (1) is a multivariate 
+                               regression on LTD, beta, downside beta, upside beta and coskewness. For each regression, we
+                               add one control variable. In (2) we add cokurtosis. 
+                               Standard errors are clustered on months. In (3) we add the Fama-French
+                               factor High minus Low (HML) and in (4) we add the Fama-French factor
+                               Small minus Big (SMB).}
+   \centering
+\label{reg_clustered_on_time_2_ltd_nll}
+   \begin{tabular}{lcccc}
+      \tabularnewline \midrule \midrule
+      Dependent Variable: & \multicolumn{4}{c}{$r_{t+1}$}\\
+      Model:         & (1)            & (2)            & (3)           & (4)\\  
+      \midrule
+      \emph{Variables}\\
+      (Intercept)    & 0.0045$^{**}$  & 0.0045$^{**}$  & 0.0046$^{**}$ & 0.0050$^{**}$\\   
+                     & (0.0019)       & (0.0019)       & (0.0019)      & (0.0022)\\   
+      LTD            & 0.0194$^{***}$ & 0.0186$^{***}$ & 0.0182$^{**}$ & 0.0182$^{**}$\\   
+                     & (0.0074)       & (0.0072)       & (0.0071)      & (0.0071)\\   
+      $\beta$        & -0.0021        & -0.0026        & -0.0022       & -0.0020\\   
+                     & (0.0091)       & (0.0090)       & (0.0091)      & (0.0091)\\   
+      $\beta^{-}$    & 0.0027         & 0.0028         & 0.0026        & 0.0025\\   
+                     & (0.0034)       & (0.0034)       & (0.0035)      & (0.0035)\\   
+      $\beta^{+}$    & 0.0010         & 0.0015         & 0.0012        & 0.0012\\   
+                     & (0.0066)       & (0.0065)       & (0.0065)      & (0.0066)\\   
+      Coskewness     & -0.0034$^{*}$  & -0.0050$^{*}$  & -0.0051$^{*}$ & -0.0052$^{*}$\\   
+                     & (0.0020)       & (0.0028)       & (0.0028)      & (0.0027)\\   
+      Cokurtosis     &                & 0.0010$^{*}$   & 0.0010$^{*}$  & 0.0010$^{*}$\\   
+                     &                & (0.0005)       & (0.0005)      & (0.0005)\\   
+      HML            &                &                & -0.0702       & -0.0663\\   
+                     &                &                & (0.0538)      & (0.0568)\\   
+      SMB            &                &                &               & -0.0223\\   
+                     &                &                &               & (0.0589)\\   
+      \midrule
+      \emph{Fit statistics}\\
+      Observations   & 184,674        & 184,674        & 184,674       & 184,674\\  
+      R$^2$          & 0.00172        & 0.00188        & 0.00271       & 0.00278\\  
+      Adjusted R$^2$ & 0.00169        & 0.00185        & 0.00267       & 0.00274\\  
+      \midrule \midrule
+      \multicolumn{5}{l}{\emph{Clustered (date) standard-errors in parentheses}}\\
+      \multicolumn{5}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+   \end{tabular}
+\end{table}

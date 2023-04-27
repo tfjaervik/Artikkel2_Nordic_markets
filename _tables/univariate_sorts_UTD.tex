@@ -1,0 +1,32 @@
+\begin{table}[ht]
+\caption{\\ \large{\textbf{Future returns sorted on UTD}}}
+\captionsetup{font = footnotesize, justification = justified, width = \linewidth}
+\caption*{Stocks have been sorted into quintiles based on their
+                        estimated UTD. For each quintile, a value weighted return
+                        for month t+1 has been calculated using weights from
+                        month t. This gives 1 time series per quintile of value
+                        weighted portfolio returns in month t+1. The column 
+                        'Returns' report the time average of these series. *, **
+                        and *** indicate statistical significance at,
+                        respectively, the 10\%, 5\% and 1\% significance level.
+                        
+                        Note that in the presence of tied UTD values, the first 
+                        observation with that LTD value is ranked lower than the 
+                        following observation with the same UTD value. This pattern
+                        repeats in the presence of more than two ties.}
+\centering
+\label{tab:UTD_sorted_future_returns}
+\begin{tabular}[t]{llr}
+\toprule
+Quintile & Returns & P-value\\
+\midrule
+1 Weak UTD & 1.071\%*** & 0.001\\
+2 & 0.805\%*** & 0.010\\
+3 & 0.254\% & 0.413\\
+4 & 0.626\%* & 0.051\\
+5 Strong UTD & 0.454\% & 0.276\\
+\addlinespace
+Strong - Weak & -0.617\%** & 0.019\\
+\bottomrule
+\end{tabular}
+\end{table}

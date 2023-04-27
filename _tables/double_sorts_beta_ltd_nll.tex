@@ -1,0 +1,36 @@
+\begin{table}[H]
+\caption{\\ \large{\textbf{Future returns sorted on beta and LTD}}}
+\captionsetup{font = footnotesize, justification = justified, width = \linewidth}
+\caption*{Stocks have been sorted into quintiles based on their
+                        estimated beta and LTD, but using the optimized negative log-likelihood
+                        function as a decision criterion for choosing the optimal
+                        copula specification. For each quintile, a value weighted return
+                        for month t+1 has been calculated using weights from
+                        month t. This gives 1 time series per quintile of value
+                        weighted portfolio returns in month t+1. The column 
+                        'Returns' report the time average of these series. *, **
+                        and *** indicate statistical significance at,
+                        respectively, the 10\%, 5\% and 1\% significance level.
+                        
+                        Note that in the presence of tied beta and/or LTD values, the first 
+                        observation with that beta/LTD value is ranked lower than the 
+                        following observation with the same beta/LTD value. This pattern
+                        repeats in the presence of more than two ties. T-statistics for
+                        all the hypothesis testing have been calculated using Newey
+                        and West (1987) standard errors.}
+\centering
+\label{tab:beta_ltd_nll_sorted_future_returns}
+\begin{tabular}[t]{llllll}
+\toprule
+Quintile & 1 Low $\beta$ & 2 & 3 & 4 & 5 High $\beta$\\
+\midrule
+1 Weak LTD & 0.684\%** & 0.863\%*** & 0.226\% & 0.879\%* & 0.838\%*\\
+2 & 0.465\%** & 0.621\%** & 0.763\%* & 0.414\% & 0.016\%\\
+3 & 0.32\% & 0.528\%** & 0.829\%** & 0.901\%** & 0.691\%\\
+4 & 0.594\%*** & 0.707\%** & 1.093\%*** & 1.053\%*** & 0.608\%\\
+5 Strong LTD & 0.74\%*** & 0.765\%*** & 1.345\%*** & 0.777\%** & 0.672\%\\
+\addlinespace
+Strong - Weak & 0.056\% & -0.098\% & 1.118\%*** & -0.102\% & -0.166\%\\
+\bottomrule
+\end{tabular}
+\end{table}

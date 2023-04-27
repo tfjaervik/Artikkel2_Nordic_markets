@@ -1,0 +1,33 @@
+\begin{table}[H]
+\caption{\\ \large{\textbf{Future returns sorted on downside beta and LTD}}}
+\captionsetup{font = footnotesize, justification = justified, width = \linewidth}
+\caption*{Stocks have been sorted into quintiles based on their
+                        estimated downside beta and LTD. For each quintile, an equal weighted return
+                        for month t+1 has been calculated. This gives 1 time series per quintile of equal
+                        weighted portfolio returns in month t+1. The column 
+                        'Returns' report the time average of these series. *, **
+                        and *** indicate statistical significance at,
+                        respectively, the 10\%, 5\% and 1\% significance level.
+                        
+                        Note that in the presence of tied downside beta and/or LTD values, the first 
+                        observation with that downside beta/LTD value is ranked lower than the 
+                        following observation with the same downside beta/LTD value. This pattern
+                        repeats in the presence of more than two ties. T-statistics for
+                        all the hypothesis testing have been calculated using Newey
+                        and West (1987) standard errors.}
+\centering
+\label{tab:downside_beta_ltd_sorted_future_returns_equal_weighted}
+\begin{tabular}[t]{llllll}
+\toprule
+Quintile & 1 Low $\beta^{-}$ & 2 & 3 & 4 & 5 High $\beta^{-}$\\
+\midrule
+1 Weak LTD & 0.421\% & 0.983\%*** & 1.201\%*** & 1.164\%** & 0.955\%\\
+2 & 0.384\%* & 0.839\%** & 1.184\%*** & 1.256\%*** & 1.269\%**\\
+3 & 0.122\% & 0.881\%*** & 0.933\%** & 0.916\%** & 0.99\%*\\
+4 & 0.121\% & 0.746\%** & 1.289\%*** & 1.194\%*** & 0.815\%\\
+5 Strong LTD & 0.303\% & 1.001\%*** & 1.279\%*** & 1.104\%*** & 0.906\%\\
+\addlinespace
+Strong - Weak & -0.119\% & 0.018\% & 0.078\% & -0.061\% & -0.049\%\\
+\bottomrule
+\end{tabular}
+\end{table}

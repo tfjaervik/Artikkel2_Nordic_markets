@@ -1,0 +1,41 @@
+\begin{table}[H]
+\caption{\\ \large{\textbf{Data definitions}}}
+\captionsetup{font = footnotesize, justification = justified, width = \linewidth}
+\caption*{This table summarises the definitions of the main variables
+                        used in this study.}
+\centering
+\label{tab:data_definitions}
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{5em}>{\raggedright\arraybackslash}p{25em}>{\raggedright\arraybackslash}p{5em}}
+\toprule
+\multicolumn{1}{>{\centering\arraybackslash}p{5em}}{\textbf{Variable}} & \multicolumn{1}{>{\centering\arraybackslash}p{25em}}{\textbf{Definition}} & \multicolumn{1}{>{\centering\arraybackslash}p{5em}}{\textbf{Data source}}\\
+\midrule
+$r_{t}$ ($r_{m}/r_{f}$) & Return at time t (market return/risk-free rate),the two first in excess
+          of the risk-free rate. & TDS, Estimated\\
+LTD & Lower tail dependence coefficient of individual stock returns
+             and market returns. The coefficient is estimated on daily
+             data with 12 month rolling windows. The estimation frequency
+             is 1 month. & TDS, Estimated\\
+$\beta$ & Covariance between excess stock return and excess market return. 
+             Calculated on monthly data. & TDS, Estimated\\
+$\beta^{-}$ & Downside beta estimated on daily return data from one year, 
+             following Ang, Chen and Xing (2006). It is the the same as $\beta$,
+             but calculated conditional on return observations exceeding the 
+             mean of the market return observations. & TDS, Estimated\\
+$\beta^{+}$ & Upside beta estimated on daily return data from one year, 
+          following Ang, Chen and Xing (2006). It is the the same as $\beta$,
+          but calculated conditional on return observations being lower than the 
+          mean of the market return observations. & TDS, Estimated\\
+\addlinespace
+Coskewness & The coskewness of the daily return of a stock with the market. & TDS, Estimated\\
+Cokurtosis & To cokurtosis of the daily return of a stock with the market & TDS, Estimated\\
+size & The logarithm of market capitalization & TDS, Estimated\\
+bookmarket & Book value divided by market capitalization, where book value is
+          calculated as Total Assets minus Total Liabilities & TDS, Estimated\\
+HML & The High minus Low factor from Fama and French (1993). Calculated from monthly
+          data from TDS. & TDS, \vphantom{1} Estimated\\
+\addlinespace
+SMB & The Small minus Big factor from Fama and French (1993). Calculated from monthly
+          data from TDS. & TDS, Estimated\\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,35 @@
+\begin{table}[H]
+\caption{\\ \large{\textbf{Trading strategy}}}
+\captionsetup{justification = justified, width = \linewidth}
+\caption*{Regression of one-month-ahead value-weigthed long  short portfolio returns 
+                               (strong LTD stocks minus weak LTD stocks) on the
+                               factors from the Fama and French (1993) three-factor model . (1) is a univariate regression
+                               on the market return in excess of the risk-free rate, (2) adds
+                               the HML factor, and (3) adds the SMB factor. The construction of the 
+                               HML and SMB factors are outlined in the Appendix in section 7.2.}
+   \centering
+\label{trading_strategy_label}
+   \begin{tabular}{lccc}
+      \tabularnewline \midrule \midrule
+      Dependent Variable: & \multicolumn{3}{c}{$LTD5_{r_{t+1}} - LTD1_{r_{t+1}}$}\\
+      Model:          & (1)                   & (2)             & (3)\\  
+      \midrule
+      \emph{Variables}\\
+      (Intercept)     & 0.0026                & 0.0033          & 0.0043\\   
+                      & (0.0029)              & (0.0028)        & (0.0030)\\   
+      $r_{m} - r_{f}$ & -0.0576               & -0.1042$^{*}$   & -0.1150$^{*}$\\   
+                      & (0.0584)              & (0.0580)        & (0.0592)\\   
+      HML             &                       & -0.2460$^{***}$ & -0.2369$^{***}$\\   
+                      &                       & (0.0622)        & (0.0629)\\   
+      SMB             &                       &                 & -0.0615\\   
+                      &                       &                 & (0.0664)\\   
+      \midrule
+      \emph{Fit statistics}\\
+      Observations    & 261                   & 261             & 261\\  
+      R$^2$           & 0.00375               & 0.06075         & 0.06388\\  
+      Adjusted R$^2$  & $-9.8\times 10^{-5}$  & 0.05347         & 0.05295\\  
+      \midrule \midrule
+      \multicolumn{4}{l}{\emph{IID standard-errors in parentheses}}\\
+      \multicolumn{4}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+   \end{tabular}
+\end{table}
